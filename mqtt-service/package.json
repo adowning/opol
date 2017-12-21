@@ -1,0 +1,29 @@
+{
+  "name": "mqtt-db-sync",
+  "version": "1.0.0",
+  "description": "Synchronise MQTT messages with storage systems like Firebase, MySQL or MongoDB",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukevenediger/mqtt-db-sync.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukevenediger/mqtt-db-sync/issues"
+  },
+  "homepage": "https://github.com/lukevenediger/mqtt-db-sync#readme",
+  "dependencies": {
+    "firebase": "^4.8.1",
+    "mqtt": "^2.15.0",
+    "q": "^1.5.1",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {}
+}
