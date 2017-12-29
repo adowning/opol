@@ -1,5 +1,22 @@
 {
-  "dependencies": {
-    "firebase-tools": "^3.8.0"
-  }
+    "scripts": {
+        "start": "npm-run-all --parallel dev server",
+        "dev": "nodemon mqtt-service/index.js",
+        "server": "node --inspect-brk=9222 server.js",
+        "prod": "pm2 build/dev-server.js",
+        "build": "node build/build.js",
+        "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+        "e2e": "node test/e2e/runner.js",
+        "test": "npm run unit && npm run e2e",
+        "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    },
+
+    "nodemonConfig": {
+        "ignore": ["test/*", "docs/*"],
+        "delay": "100",
+        "verbose": true
+    },
+    "dependencies": {
+        "firebase-tools": "^3.8.0"
+    }
 }

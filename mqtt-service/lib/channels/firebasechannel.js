@@ -38,13 +38,21 @@ function FirebaseChannel(config) {
     }
 
     this.accept = function(topic, message) {
-        var ref = db.ref(topic)
+        console.log(topic)
+        var ref = db.ref("owntracks")
             // console.log(JSON.parse(message))
         var pmessage = JSON.parse(message)
             // console.log(pmessage)
         pmessage.time = new Date().getTime()
-        console.log(pmessage)
-        ref.set(pmessage)
+        var plocation = {}
+        plocation.lat = pmessage.lat
+        plocation.lng = pmessage.lon
+        pmessage.location = plocation
+        pmessage.tablet = topic
+            // console.log(plocation)
+            // console.log(pmessage)
+            // ref.set(pmessage)
+        ref.push(pmessage)
     }
     initialise()
 }
