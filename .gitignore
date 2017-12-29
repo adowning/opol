@@ -2,3 +2,9 @@ node_modules/
 app/node_modules/
 mqtt-service/node_modules/
 app/brunch_app/
+app/.DS_Store
+app/.thumbs.db
+app/dist/
+app/npm-debug.log*
+app/cordova/platforms
+app/cordova/plugins
