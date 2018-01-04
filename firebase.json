@@ -5,9 +5,14 @@
     "hosting": {
         "public": "app/dist",
         "rewrites": [{
-            "source": "**",
-            "destination": "/index.html"
-        }]
+                "source": "**",
+                "destination": "/index.html"
+            },
+            {
+                "source": "/hooks",
+                "function": "date"
+            }
+        ]
     },
     "storage": {
         "rules": "storage.rules"

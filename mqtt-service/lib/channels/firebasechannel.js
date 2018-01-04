@@ -1,10 +1,10 @@
-"use strict"
+'use strict'
 /* jshint -W097 */
 /* globals require, module */
 
-const winston = require("winston"),
-    firebase = require("firebase"),
-    q = require("q")
+const winston = require('winston'),
+    firebase = require('firebase'),
+    q = require('q')
 
 /**
  * Syncs data with Firebase
@@ -18,9 +18,9 @@ function FirebaseChannel(config) {
 
     this.connect = function() {
         winston.info(
-                "Authenticating with " +
+                'Authenticating with ' +
                 config.databaseURL +
-                " and " +
+                ' and ' +
                 config.serviceAccount
             )
             // app = firebase.initializeApp({
@@ -28,10 +28,10 @@ function FirebaseChannel(config) {
             //     databaseURL: config.databaseURL
             // })
         app = firebase.initializeApp({
-            apiKey: "AIzaSyBEOwXK3CiV6ASIS66a7vicIbfHqAaLt1w",
-            databaseURL: "https://andrews-test.firebaseio.com/",
-            authDomain: "andrews-test.firebaseapp.com",
-            storageBucket: "gs://andrews-test.appspot.com"
+            apiKey: 'AIzaSyBEOwXK3CiV6ASIS66a7vicIbfHqAaLt1w',
+            databaseURL: 'https://andrews-test.firebaseio.com/',
+            authDomain: 'andrews-test.firebaseapp.com',
+            storageBucket: 'gs://andrews-test.appspot.com'
         })
         db = app.database()
         return q()
@@ -39,7 +39,7 @@ function FirebaseChannel(config) {
 
     this.accept = function(topic, message) {
         console.log(topic)
-        var ref = db.ref("owntracks")
+        var ref = db.ref('owntracks')
             // console.log(JSON.parse(message))
         var pmessage = JSON.parse(message)
             // console.log(pmessage)
@@ -48,7 +48,8 @@ function FirebaseChannel(config) {
         plocation.lat = pmessage.lat
         plocation.lng = pmessage.lon
         pmessage.location = plocation
-        pmessage.tablet = topic
+        console.log(topic.split('/')[2])
+        pmessage.tablet = topic.split('/')[2]
             // console.log(plocation)
             // console.log(pmessage)
             // ref.set(pmessage)

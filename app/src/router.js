@@ -1,54 +1,171 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
+import VueResource from 'vue-resource'
+import Profile from './components/User/Profile'
+import Admin from './components/Admin'
+import Routes from './components/Routes/Routes'
+import Dashboard from './components/Dashboard/Dashboard'
+import Employees from './components/EmployeeHub/Employees'
+import Applicants from './components/EmployeeHub/Applicants'
+import AuthService from './auth/AuthService'
+import Chat from './components/Chat/Chat'
 
-Vue.use(VueRouter)
 
-function load(component) {
-    // '@' is aliased to src/components
-    return () =>
-        import (`@/${component}.vue`)
-}
+Vue.use(Router)
+Vue.use(VueResource)
 
-export default new VueRouter({
-    /*
-     * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
-     * it is only to be used only for websites.
-     *
-     * If you decide to go with "history" mode, please also open /config/index.js
-     * and set "build.publicPath" to something other than an empty string.
-     * Example: '/' instead of current ''
-     *
-     * If switching back to default "hash" mode, don't forget to set the
-     * build publicPath back to '' so Cordova builds work again.
-     */
+const auth = new AuthService()
 
-    mode: 'hash',
-    // mode: 'hash',
-    scrollBehavior: () => ({ y: 0 }),
-    routes: [
-            { path: '/', component: load('layout/Home') },
-            { path: '/home', component: load('layout/Home') },
-            { path: '/about', component: load('layout/LiveView') },
-            // { path: '/contact', component: load('layout/Contact') },
-            // { path: '/more', component: load('layout/More') },
-            // Always leave this last one
-            { path: '*', component: load('Error404') } // Not found
-        ]
-        // routes: [
-        //     // { path: '/', component: load('Hello') },
-        //     // {
-        //     //     path: '/',
-        //     //     name: 'Hello',
-        //     //     component: load('Hello')
-        //     // },
-        //     {
-        //         path: '/',
-        //         name: 'LiveView',
-        //         component: load('LiveView')
-        //     },
-        //     // { path: '/liveview', component: load('LiveView') },
-
-    //     // Always leave this last one
-    //     { path: '*', component: load('Error404') } // Not found
-    // ]
+export default new Router({
+  routes: [{
+      path: '/',
+      name: 'Dashboard',
+      component: Dashboard,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/routes',
+      name: 'Routes',
+      component: Routes,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/employees',
+      name: 'Employees',
+      component: Employees,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/applicants',
+      name: 'Applicants',
+      component: Applicants,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/chat',
+      name: 'Chat',
+      component: Chat,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated() || !auth.isAdmin()) {
+          next(false)
+        } else {
+          next()
+        }
+      }
+    }
+  ]
 })
+
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
+
+// Vue.use(VueRouter)
+// import AuthService from './auth/AuthService'
+// const auth = new AuthService()
+
+// function load (component) {
+//   // '@' is aliased to src/components
+//   return () =>
+//         import(`@/${component}.vue`)
+// }
+// // import AuthGuard from './auth-guard'
+// import Profile from './components/User/Profile'
+// export default new VueRouter({
+//   /*
+//      * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
+//      * it is only to be used only for websites.
+//      *
+//      * If you decide to go with "history" mode, please also open /config/index.js
+//      * and set "build.publicPath" to something other than an empty string.
+//      * Example: '/' instead of current ''
+//      *
+//      * If switching back to default "hash" mode, don't forget to set the
+//      * build publicPath back to '' so Cordova builds work again.
+//      */
+
+//   mode: 'hash',
+//   // mode: 'hash',
+//   scrollBehavior: () => ({ y: 0 }),
+//   routes: [
+//     { path: '/', component: load('layout/Home'), },
+
+//     { path: '/home', component: load('layout/Home'),      beforeEnter: (to, from, next) => {
+//         if (!auth.isAuthenticated()) {
+//           next(false)
+//         } else {
+//           next()
+//         }
+//       } },
+//     { path: '/liveview', component: load('layout/LiveView'),      beforeEnter: (to, from, next) => {
+//         if (!auth.isAuthenticated()) {
+//           next(false)
+//         } else {
+//           next()
+//         }
+//       } },
+//     { path: '/assets', component: load('layout/Assets') },
+//     { path: '/signin', component: load('User/Signin') },
+//     { path: '/signup', component: load('User/Signup') },
+//     {
+//       path: '/profile',
+//       name: 'Profile',
+//       component: Profile,
+//       // beforeEnter: AuthGuard
+//     },
+//     {
+//       path: '/hub',
+//       component: load('layout/EmployeeHub')
+
+//     },
+
+//     { path: '*', component: load('Error404') } // Not found
+//   ]
+// })

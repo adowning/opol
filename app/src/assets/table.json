@@ -1,0 +1,31 @@
+[{
+        "source": "Audit",
+        "severity": "I",
+        "serviceable": "Informational",
+        "callhome": "N",
+        "isodate": "2015-05-19T08:11:05",
+        "system_name": "SN#Y014BG2790EV",
+        "event_id": "0000007A",
+        "log_number": "4006DC55",
+        "message": "Login successful. User ID userid from Web at IP address 10.72.97.94.",
+        "event_number": "4001A5AD",
+        "cmm_event_id": "",
+        "unique_id": 1,
+        "timerange": 2
+    },
+    {
+        "source": "Audit",
+        "severity": "I",
+        "serviceable": "Informational",
+        "callhome": "N",
+        "isodate": "2015-05-19T07:17:01",
+        "system_name": "SN#Y014BG2790EV",
+        "event_id": "0001601A",
+        "log_number": "4006DC54",
+        "message": "Logoff successful. User ID USERID from Web at IP address 10.72.97.108.",
+        "event_number": "4001A5AC",
+        "cmm_event_id": "",
+        "unique_id": 2,
+        "timerange": 2
+    }
+]

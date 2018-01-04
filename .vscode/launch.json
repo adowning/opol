@@ -1,0 +1,95 @@
+{
+      "version": "0.2.0",
+      "configurations": [
+            {
+                  "type": "chrome",
+                  "request": "attach",
+                  "name": "Attach to Chrome",
+                  "port": 9222,
+                  "webRoot": "${workspaceFolder}"
+            },
+            {
+                  "name": "Debug",
+                  "type": "chrome",
+                  "request": "launch",
+                  "webRoot": "${workspaceRoot}",
+                  "url": "http://localhost:8080/#/",
+                  "userDataDir": "${workspaceRoot}/.vscode/chrome",
+                  "sourceMaps": true,
+                  // "preLaunchTask": "development",
+                  "smartStep": true,
+                  "internalConsoleOptions": "openOnSessionStart",
+                  "skipFiles": [
+                        "node_modules/**"
+                  ],
+                  "sourceMapPathOverrides": {
+                        "webpack:///*": "${webRoot}/*"
+                  }
+            },
+                    {
+                     "name": "Launch localhost",
+                     "firefoxExecutable": "/home/ash/.local/share/umake/web/firefox-dev/firefox",
+                     "type": "firefox",
+                     "request": "launch",
+                     "reAttach": true,
+                     "url": "http://localhost:8080/#/",
+                     "pathMappings": [
+                      {
+                       "url": "http://localhost",
+                       "path": "${workspaceFolder}"
+                      }
+                     ]
+                    }
+      ]
+}
+// {
+//  // Use IntelliSense to learn about possible attributes.
+//  // Hover to view descriptions of existing attributes.
+//  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//  "version": "0.2.0",
+//  "configurations": [
+//   {
+//         "type": "chrome",
+//         "request": "launch",
+//         "name": "Launch Chrome",
+//         "ProgramLocation": "sadf"
+//         "url": "http://localhost:8080",
+//         "webRoot": "${workspaceFolder}"
+//   },
+  
+//   {
+//    "name": "Launch index.html",
+//    "type": "firefox",
+//    "request": "launch",
+//    "reAttach": true,
+//    "file": "${workspaceFolder}/index.html",
+//    "url": "webpack:///", "path": "${webRoot}",
+//    "log": {
+//     "fileName": "${workspaceFolder}/log.txt",
+//     "fileLevel": {
+//      "default": "Debug"
+//     } 
+//    }
+//   },
+//         {
+//          "name": "Launch localhost",
+//          "firefoxExecutable": "/home/ash/.local/share/umake/web/firefox-dev/firefox",
+//          "type": "firefox",
+//          "request": "launch",
+//          "reAttach": true,
+//          "url": "http://localhost:8080/#/",
+//          "pathMappings": [
+//           {
+//            "url": "http://localhost",
+//            "path": "${workspaceFolder}"
+//           }
+//          ]
+//         }
+
+
+
+
+//  ]
+//  }
+
+ 

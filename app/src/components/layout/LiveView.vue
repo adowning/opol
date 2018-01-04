@@ -1,20 +1,58 @@
 <!-- main app component -->
 <template>
-  <div>
+  <div class="layout-padding row justify-center" style="padding-right: 44px;">
 
-    <google-map></google-map>
-    <!-- <marker-table></marker-table> -->
-    <q-btn icon="create" @click="checkVehicleList">New ixtem</q-btn>
+    <div class="doc-container">
 
+      <!-- <div class="doc-container"> -->
+      <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+
+      <div class="row">
+
+        <div class="col-sm-9">
+
+          <q-toolbar>
+            <q-btn flat>
+              <q-icon name="menu" />
+            </q-btn>
+            <q-toolbar-title>
+              Toolbar
+            </q-toolbar-title>
+            <q-btn flat>
+              <q-icon name="more_vert" />
+            </q-btn>
+          </q-toolbar>
+          <google-map></google-map>
+
+        </div>
+
+        <div class="col-sm-3">
+
+          <!-- <q-toolbar >
+        <q-btn flat>
+          <q-icon name="menu" />
+        </q-btn>
+        <q-toolbar-title>
+          Activity List
+        </q-toolbar-title>
+        <q-btn flat>
+          <q-icon name="more_vert" />
+        </q-btn>
+      </q-toolbar> -->
+
+          <chat></chat>
+
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
+
 import GoogleMap from '../GoogleMap'
-import { Qbtn } from 'quasar'
-// import MarkerTable from './components/MarkerTable'
-// import PieChart from './components/PieChart'
-// import BarChart from './components/BarChart'
+import Chat from '../Chat'
 import axios from 'axios'
 // var vehicleList = []
 // import { RotateSquare2 } from "vue-loading-spinner"
@@ -27,20 +65,20 @@ var axez = axios.create({
 
 export default {
   name: 'LiveView',
-  data() {
+  data () {
     return {
       ratingLabels: ['ancur', 'jelek', 'pas', 'oke', 'mantab'],
       ratingFilter: [0, 1, 2, 3, 4],
       vehicleList: []
     }
   },
-  firebase() {
+  firebase () {
     return {
       markers: this.$db.ref('owntracks')
     }
   },
   methods: {
-    addRandomMarker() {
+    addRandomMarker () {
       this.$db.ref('markers').push({
         position: {
           lat: -1.243668 + Math.random(),
@@ -54,7 +92,7 @@ export default {
       })
       this.ratingFilter.reverse().reverse()
     },
-    deleteMarker() {
+    deleteMarker () {
       if (this.markers.length === 0) {
         alert('tidak ada marker')
         return
@@ -64,21 +102,21 @@ export default {
         .child(this.markers[0]['.key'])
         .remove()
     },
-    countTotalRating(rate) {
+    countTotalRating (rate) {
       if (this.markers === undefined) {
         return 0
       }
 
       return this.markers.filter(marker => marker.meta.rating === rate).length
     },
-    checkVehicleList: function() {
+    checkVehicleList: function () {
       // log.info('checking list and adding drivers')
       var _this = this
       var vl = this.vehicleList
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         axez
           .get('/assets/filter.api?status=checked_out&page=1')
-          .then(function(response) {
+          .then(function (response) {
             var assetList = response.data.assets
             for (var value of assetList) {
               if (value.group_id == '72657') {
@@ -91,49 +129,17 @@ export default {
             _this.vehicleList = vl / resolve(vl)
             // missing = []
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log('err ' + error)
             reject(error)
           })
       })
     }
   },
-  computed: {
-    // pieData() {
-    //   return {
-    //     labels: this.ratingLabels,
-    //     datasets: [
-    //       {
-    //         backgroundColor: [
-    //           '#FF6384',
-    //           '#36A2EB',
-    //           '#FFCE56',
-    //           '#55FF56',
-    //           '#33DD56'
-    //         ],
-    //         data: this.ratingFilter.map(rating => this.countTotalRating(rating))
-    //       }
-    //     ]
-    //   }
-    // },
-    // barData() {
-    //   return {
-    //     labels: this.ratingLabels,
-    //     datasets: [
-    //       {
-    //         label: 'Jumlah Rating',
-    //         backgroundColor: '#36A2EB',
-    //         data: this.ratingFilter.map(rating => this.countTotalRating(rating))
-    //       }
-    //     ]
-    //   }
-    // }
-  },
+  computed: {},
   components: {
-    GoogleMap
-    // MarkerTable,
-    // PieChart,
-    // BarChart
+    GoogleMap,
+    Chat
   }
 }
 </script>
@@ -146,4 +152,13 @@ export default {
 .map-control {
   margin-bottom: 16px;
 }
+/* .flex-grid {
+  display: flex;
+} */
+/* .col {
+  flex: 1;
+} */
+/* #activity {
+  max-width: 400px;
+} */
 </style>

@@ -8,3 +8,7 @@ app/dist/
 app/npm-debug.log*
 app/cordova/platforms
 app/cordova/plugins
+mattermost*
+mattermost-client/*
+mattermost-light-cli/*
+mattermost-redux/*
