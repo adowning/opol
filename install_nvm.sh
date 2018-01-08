@@ -14,7 +14,7 @@ nvm_latest_version() {
   echo "v0.31.0"
 }
 
-#
+
 # Outputs the location to NVM depending on:
 # * The availability of $NVM_SOURCE
 # * The method used ("script" or "git" in the script, defaults to "git")
