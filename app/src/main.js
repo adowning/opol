@@ -21,6 +21,7 @@ import * as VueGoogleMaps from "vue2-google-maps"
 import VueFire from "vuefire"
 import firebase from "firebase"
 import VueEvents from "vue-event-handler"
+import vueKanban from "vue-kanban"
 
 import store from "./vuex/store"
 Vue.use(VueFire)
@@ -111,6 +112,7 @@ Vue.prototype.$employeeListLookup
 //         console.log(response)
 //     })
 // })
+Vue.use(vueKanban)
 
 Vue.config.productionTip = false
 

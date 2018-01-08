@@ -1,8 +1,11 @@
 {
     "scripts": {
-        "start": "npm-run-all --parallel dev server",
-        "dev": "fuser -k 8080/tcp && nodemon mqtt-service/index.js",
-        "server": "node --inspect-brk=9222 server.js",
+      "par": "parallelshell \"npm run dev\" \"npm run rocket\"",  
+      "boom": "concurrent --kill-others \"npm run dev\" \"npm run rocket\"",
+        "start": "npm-run-all --parallel dev rocket server",
+        "dev": "nodemon mqtt-service/index.js",
+        "rocket": "nodemon rocketChat/rocketChat.js",
+        "server": "node --inspect-brk=9224 server.js",
         "prod": "pm2 build/dev-server.js",
         "build": "node build/build.js",
         "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
@@ -22,5 +25,8 @@
         "firebase-tools": "^3.8.0",
         "firechat": "^3.0.1",
         "jshint": "^2.9.5"
+    },
+    "devDependencies": {
+        "parallelshell": "^3.0.2"
     }
 }

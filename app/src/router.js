@@ -13,6 +13,7 @@ import Chat from "./components/Chat/Chat"
 import Callback from "./callback"
 import LiveView from "./components/layout/LiveView.vue"
 import Assets from "./components/layout/Assets"
+import WorkShop from "./components/layout/WorkShop.vue"
 Vue.use(Router)
 Vue.use(VueResource)
 
@@ -52,6 +53,18 @@ export default new Router({
             path: "/routes",
             name: "Routes",
             component: Routes,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/workshop",
+            name: "WorkShop",
+            component: WorkShop,
             beforeEnter: (to, from, next) => {
                 if (!auth.isAuthenticated()) {
                     next(false)

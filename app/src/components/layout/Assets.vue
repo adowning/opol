@@ -132,6 +132,9 @@ import {
 var table
 var userList = []
 export default {
+  data: {
+    table: []
+  },
   components: {
     QDataTable,
     QField,
@@ -143,6 +146,19 @@ export default {
     QIcon,
     QTooltip,
     QCollapsible
+  },
+  computed: {
+    table: function() {
+      return this.$snipeit
+        .get("hardware")
+        .then(response => {
+          console.log(response.data.rows)
+          this.table = response.data.rows
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    }
   },
   methods: {
     changeMessage(props) {
@@ -157,19 +173,20 @@ export default {
     },
     refresh(done) {
       console.log("refreshing")
-      this.$db
-        .ref("checkedOutDevices")
-        .then(response => {
-          // console.log(response.data.rows)
-          this.table = response.data.rows
-          done()
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-      // this.timeout = setTimeout(() => {
-      //   done()
-      // }, 5000)
+      // this.table = response.data.rows = this.$db.ref("checkedOutDevices")
+      // this.$db
+      //   .ref("checkedOutDevices")
+      //   .then(response => {
+      //     // console.log(response.data.rows)
+      //     this.table = response.data.rows
+      //     done()
+      //   })
+      //   .catch(e => {
+      //     this.errors.push(e)
+      //   })
+      // // this.timeout = setTimeout(() => {
+      // //   done()
+      // // }, 5000)
     },
     selection(number, rows) {
       console.log(`selected ${number}: ${rows}`)
@@ -358,7 +375,7 @@ export default {
     this.$snipeit
       .get("hardware")
       .then(response => {
-        // console.log(response.data.rows)
+        console.log(response.data.rows)
         this.table = response.data.rows
       })
       .catch(e => {
@@ -367,7 +384,7 @@ export default {
     this.$snipeit
       .get("users")
       .then(response => {
-        // console.log(response.data.rows)
+        console.log(response.data.rows)
         // this.userList = response.data.rows
         for (var user of response.data.rows) {
           var item = {}
@@ -380,6 +397,9 @@ export default {
       })
   },
   watch: {
+    // table(value){
+    //     this.table = value
+    // }
     pagination(value) {
       if (!value) {
         this.oldPagination = clone(this.config.pagination)

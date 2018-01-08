@@ -17,6 +17,14 @@ module.exports = [{
     {
         type: "item",
         icon: "fa fa-th",
+        name: "WorkShop",
+        router: {
+            name: "WorkShop"
+        }
+    },
+    {
+        type: "item",
+        icon: "fa fa-th",
         name: "Assets",
         router: {
             name: "Assets"
