@@ -126,7 +126,7 @@ import {
   QTooltip,
   QCollapsible,
   clone
-} from 'quasar'
+} from "quasar"
 
 // import table from '../../assets/table'
 var table
@@ -147,7 +147,7 @@ export default {
   methods: {
     changeMessage(props) {
       props.rows.forEach(row => {
-        row.data.message = 'Gogu'
+        row.data.message = "Gogu"
       })
     },
     deleteRow(props) {
@@ -156,9 +156,9 @@ export default {
       })
     },
     refresh(done) {
-      console.log('refreshing')
-      this.$snipeit
-        .get('hardware')
+      console.log("refreshing")
+      this.$db
+        .ref("checkedOutDevices")
         .then(response => {
           // console.log(response.data.rows)
           this.table = response.data.rows
@@ -175,11 +175,11 @@ export default {
       console.log(`selected ${number}: ${rows}`)
     },
     rowClick(row) {
-      console.log('clicked on a row', row)
+      console.log("clicked on a row", row)
     },
     checkIn(id) {
       this.$snipeit
-        .post('hardware/' + id + '/checkin')
+        .post("hardware/" + id + "/checkin")
         .then(response => {
           console.log(reponse)
           this.refresh()
@@ -197,23 +197,23 @@ export default {
     },
     checkOut() {
       console.log(
-        'hardware/' +
+        "hardware/" +
           this.checkoutID +
-          '/checkout?user_id=' +
+          "/checkout?user_id=" +
           this.select +
-          '&asset_id=' +
+          "&asset_id=" +
           this.checkoutID +
-          '&location_id=1'
+          "&location_id=1"
       )
       this.$snipeit
         .post(
-          'hardware/' +
+          "hardware/" +
             this.checkoutID +
-            '/checkout?assigned_user=' +
+            "/checkout?assigned_user=" +
             this.select +
-            '&assigned_asset=' +
+            "&assigned_asset=" +
             this.checkoutID +
-            '&checkout_to_type=user'
+            "&checkout_to_type=user"
         )
         .then(response => {
           console.log(response)
@@ -235,27 +235,27 @@ export default {
     return {
       table,
       userList: [],
-      select: '',
-      checkoutID: '',
+      select: "",
+      checkoutID: "",
       errors: [],
-      position: 'right',
+      position: "right",
       config: {
-        title: 'Asset List',
+        title: "Asset List",
         refresh: true,
         noHeader: false,
         columnPicker: true,
         leftStickyColumns: 0,
         rightStickyColumns: 0,
         bodyStyle: {
-          maxHeight: '500px'
+          maxHeight: "500px"
         },
-        rowHeight: '50px',
+        rowHeight: "50px",
         responsive: true,
         pagination: {
           rowsPerPage: 15,
           options: [5, 10, 15, 30, 50, 500]
         },
-        selection: 'multiple'
+        selection: "multiple"
       },
       columns: [
         // {
@@ -283,63 +283,63 @@ export default {
         //   width: '70px'
         // },
         {
-          label: 'Asset Name',
-          field: 'name',
+          label: "Asset Name",
+          field: "name",
           sort: true,
-          type: 'string'
+          type: "string"
           // width: '120px'
         },
         {
-          label: 'Asset Tag',
-          field: 'asset_tag',
+          label: "Asset Tag",
+          field: "asset_tag",
           filter: true,
           sort: true,
-          type: 'string'
+          type: "string"
           // width: '500px'
         },
         {
-          label: 'Status',
-          field: 'status_label',
+          label: "Status",
+          field: "status_label",
           filter: true,
           sort: false,
-          type: 'string',
+          type: "string",
           format(value) {
             return value.status_meta
           }
         },
         {
-          label: 'Assigned To',
-          field: 'assigned_to',
+          label: "Assigned To",
+          field: "assigned_to",
           filter: true,
           sort: false,
-          type: 'string',
+          type: "string",
           format(value) {
             try {
               return value.name
             } catch (e) {}
-            return ''
+            return ""
           }
         },
         {
-          label: 'Category',
-          field: 'category',
+          label: "Category",
+          field: "category",
           filter: true,
           sort: false,
-          type: 'string',
+          type: "string",
           format(value) {
             return value.name
           }
         },
 
         {
-          label: 'Checkin/Checkout',
-          field: 'user_can_checkout',
+          label: "Checkin/Checkout",
+          field: "user_can_checkout",
           sort: false,
           format(value) {
             if (value) {
-              return 'Check In'
+              return "Check In"
             } else {
-              return 'Check Out'
+              return "Check Out"
             }
           }
         }
@@ -347,7 +347,7 @@ export default {
 
       pagination: true,
       rowHeight: 50,
-      bodyHeightProp: 'maxHeight',
+      bodyHeightProp: "maxHeight",
       bodyHeight: 500
     }
   },
@@ -356,7 +356,7 @@ export default {
     var _this = this
     var ar = []
     this.$snipeit
-      .get('hardware')
+      .get("hardware")
       .then(response => {
         // console.log(response.data.rows)
         this.table = response.data.rows
@@ -365,7 +365,7 @@ export default {
         this.errors.push(e)
       })
     this.$snipeit
-      .get('users')
+      .get("users")
       .then(response => {
         // console.log(response.data.rows)
         // this.userList = response.data.rows
@@ -390,19 +390,19 @@ export default {
       this.config.pagination = this.oldPagination
     },
     rowHeight(value) {
-      this.config.rowHeight = value + 'px'
+      this.config.rowHeight = value + "px"
     },
     bodyHeight(value) {
       let style = {}
-      if (this.bodyHeightProp !== 'auto') {
-        style[this.bodyHeightProp] = value + 'px'
+      if (this.bodyHeightProp !== "auto") {
+        style[this.bodyHeightProp] = value + "px"
       }
       this.config.bodyStyle = style
     },
     bodyHeightProp(value) {
       let style = {}
-      if (value !== 'auto') {
-        style[value] = this.bodyHeight + 'px'
+      if (value !== "auto") {
+        style[value] = this.bodyHeight + "px"
       }
       this.config.bodyStyle = style
     }

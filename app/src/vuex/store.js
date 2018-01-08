@@ -1,41 +1,42 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue"
+import Vuex from "vuex"
 
-import * as actions from './actions'
-import * as getters from './getters'
-import modules from './modules'
-import _ from 'lodash'
+import * as actions from "./actions"
+import * as getters from "./getters"
+import modules from "./modules"
+import _ from "lodash"
 
 Vue.use(Vuex)
 
 const state = {
-  messages: []
+    messages: [],
+    isAuthenticated: false
 }
 
 const mutations = {
-  FETCH_MESSAGES (state, messages) {
-    state.messages = messages
-  },
-  SET_CURRENT_USER (state, user){
-    state.user.main = user
-  },
-  ADD_MESSAGE (state, message) {
-    state.messages.push(message)
-  },
+    FETCH_MESSAGES(state, messages) {
+        state.messages = messages
+    },
+    SET_CURRENT_USER(state, user) {
+        state.user.main = user
+    },
+    ADD_MESSAGE(state, message) {
+        state.messages.push(message)
+    },
 
-  REMOVE_MESSAGE (state, message) {
-    // find the index of the obj to remove from array
-    let index = _.findIndex(state.messages, { _id: message._id })
-    // remove the obj at position [index] from array
-    state.messages.$remove(state.messages[index])
-  }
+    REMOVE_MESSAGE(state, message) {
+        // find the index of the obj to remove from array
+        let index = _.findIndex(state.messages, { _id: message._id })
+            // remove the obj at position [index] from array
+        state.messages.$remove(state.messages[index])
+    }
 }
 
 export default new Vuex.Store({
-  actions,
-  getters,
-  modules,
-  state,
-  mutations,
-  strict: process.env.NODE_ENV !== 'production'
+    actions,
+    getters,
+    modules,
+    state,
+    mutations,
+    strict: process.env.NODE_ENV !== "production"
 })

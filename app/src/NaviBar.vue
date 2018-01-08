@@ -236,22 +236,21 @@
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu" v-if="authenticated">
+          <!-- <li class="dropdown user user-menu" v-if="authenticated">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="~admin-lte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{ currentUser.name }}</span>
+           <img :src="profile.picture" class="user-image" alt="User Image">
+             <span class="hidden-xs">{{ currentUser.name }}</span>
             </a>
             <ul class="dropdown-menu">
-              <!-- User image -->
               <li class="user-header">
                 <img src="~admin-lte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
+                  {{currentUser}}
                   {{ currentUser.name }} - {{ currentUser.position }}
                   <small>{{ currentUser.createdAt }}</small>
                 </p>
               </li>
-              <!-- Menu Body -->
               <li class="user-body">
                 <row>
                   <div class="col-xs-4 text-center">
@@ -264,9 +263,7 @@
                     <a href="#">Friendsx</a>
                   </div>
                 </row>
-                <!-- /.row -->
               </li>
-              <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
                  <router-link :to="'profile'" class="btn btn-default btn-flat">Profile</router-link>
@@ -276,7 +273,7 @@
                 </div>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- Control Sidebar Toggle Button -->
           <!-- <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -288,32 +285,43 @@
 </template>
 
 <script>
-  import {
-    mapGetters
-  } from 'vuex'
+import { mapGetters } from "vuex"
 
-  export default {
-    name: 'va-navibar',
-props: ['auth', 'authenticated', 'admin'],
+export default {
+  // data() {
+  //   this.auth.getProfile((err, profile) => {
+  //     if (err) {
+  //       cosole.log("got error no profile")
+  //       this.router.push("/signin")
+  //     } else {
+  //       console.log(profile)
+  //       this.profile = profile
+  //     }
+  //   })
+  //   return {
+  //     profile: {}
+  //   }
+  // },
 
+  name: "va-navibar",
+  props: ["auth", "authenticated", "admin"],
 
-    computed: {
-      ...mapGetters([
-        'unreadMessagesCount',
-        'unreadNotificationsCount',
-        'remainTasksCount',
-        'currentUser'
-      ])
+  computed: {
+    ...mapGetters([
+      "unreadMessagesCount",
+      "unreadNotificationsCount",
+      "remainTasksCount",
+      "currentUser"
+    ])
+  },
+  methods: {
+    login() {
+      this.$parent.login()
     },
-    methods: {
-        login(){
-          this.$parent.login()
-        },
-           logout(){
-          this.$parent.logout()
-        }
-    },
-    created() {
+    logout() {
+      this.$parent.logout()
     }
-  }
+  },
+  created() {}
+}
 </script>

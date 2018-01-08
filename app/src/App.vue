@@ -17,31 +17,42 @@
 
 
 <script>
-import VANaviBar from 'NaviBar.vue'
-import VASlider from 'Slider.vue'
-import VAContentWrap from 'ContentWrap.vue'
-import store from './vuex/store.js'
-import slideMenuItems from './lib/slideMenuItems.js'
-import AuthService from './auth/AuthService'
+import VANaviBar from "NaviBar.vue"
+import VASlider from "Slider.vue"
+import VAContentWrap from "ContentWrap.vue"
+import store from "./vuex/store.js"
+import slideMenuItems from "./lib/slideMenuItems.js"
+import AuthService from "./auth/AuthService"
 const auth = new AuthService()
-import Vue from 'vue'
+import Vue from "vue"
 const { login, logout, authenticated, admin, authNotifier } = auth
 
-export default { name: 'app', data () { authNotifier.on('authChange', authState =>
-{ this.authenticated = authState.authenticated
-this.admin = authState.admin })
+export default {
+  name: "app",
+  data() {
+    authNotifier.on("authChange", authState => {
+      this.authenticated = authState.authenticated
+      this.admin = authState.admin
+    })
 
-return {
-  auth, authenticated, admin, slideMenuItems: slideMenuItems } },
+    return {
+      auth,
+      authenticated,
+      admin,
+      slideMenuItems: slideMenuItems
+    }
+  },
   methods: {
     login,
-logout },
-components: { 'va-navibar': VANaviBar, 'va-slider': VASlider, 'va-content-wrap': VAContentWrap },
- store
+    logout
+  },
+  components: {
+    "va-navibar": VANaviBar,
+    "va-slider": VASlider,
+    "va-content-wrap": VAContentWrap
+  },
+  store
 }
-
-
-
 </script>
 
 

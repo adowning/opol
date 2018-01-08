@@ -970,7 +970,7 @@ babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^
   dependencies:
     regenerator-transform "^0.10.0"
 
-babel-plugin-transform-runtime@^6.15.0:
+babel-plugin-transform-runtime@^6.15.0, babel-plugin-transform-runtime@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
   dependencies:
@@ -3094,7 +3094,15 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-fullcalendar@^3.4.0:
+fullcalendar-scheduler@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/fullcalendar-scheduler/-/fullcalendar-scheduler-1.9.1.tgz#a9f5d7af913e9fe4a16cbc4589964f40b76bf01f"
+  dependencies:
+    fullcalendar "~3.8.0"
+    jquery "2 - 3"
+    moment "^2.9.0"
+
+fullcalendar@^3.4.0, fullcalendar@~3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.8.0.tgz#4c0fe494a62b0a8d640c6de8eb883b49a212b5dc"
   dependencies:
@@ -4206,6 +4214,10 @@ lodash.clonedeep@^4.5.0:
 lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
+
+lodash.defaultsdeep@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.0.tgz#bec1024f85b1bd96cbea405b23c14ad6443a6f81"
 
 lodash.escape@^3.0.0:
   version "3.2.0"
@@ -6671,6 +6683,14 @@ vue-frame@^1.0.5:
   resolved "https://registry.yarnpkg.com/vue-frame/-/vue-frame-1.0.5.tgz#0c3d03c464e2ada52e15d0a7cdbe3987274d596c"
   dependencies:
     vue "^2.2.1"
+
+vue-full-calendar@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/vue-full-calendar/-/vue-full-calendar-2.5.1.tgz#bcc4b165e3601c98981a72cb487ebd72905e89dd"
+  dependencies:
+    babel-plugin-transform-runtime "^6.23.0"
+    fullcalendar "^3.4.0"
+    lodash.defaultsdeep "^4.6.0"
 
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"

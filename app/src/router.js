@@ -1,107 +1,127 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import VueResource from 'vue-resource'
-import Profile from './components/User/Profile'
-import Admin from './components/Admin'
-import Routes from './components/Routes/Routes'
-import Dashboard from './components/Dashboard/Dashboard'
-import Employees from './components/EmployeeHub/Employees'
-import Applicants from './components/EmployeeHub/Applicants'
-import AuthService from './auth/AuthService'
-import Chat from './components/Chat/Chat'
-
-
+import Vue from "vue"
+import Router from "vue-router"
+import VueResource from "vue-resource"
+import Profile from "./components/User/Profile"
+import Signin from "./components/User/Signin"
+import Admin from "./components/Admin"
+import Routes from "./components/Routes/Routes"
+import Dashboard from "./components/Dashboard/Dashboard"
+import Employees from "./components/EmployeeHub/Employees"
+import Applicants from "./components/EmployeeHub/Applicants"
+import AuthService from "./auth/AuthService"
+import Chat from "./components/Chat/Chat"
+import Callback from "./callback"
+import LiveView from "./components/layout/LiveView.vue"
+import Assets from "./components/layout/Assets"
 Vue.use(Router)
 Vue.use(VueResource)
 
 const auth = new AuthService()
 
 export default new Router({
-  routes: [{
-      path: '/',
-      name: 'Dashboard',
-      component: Dashboard,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated()) {
-          next(false)
-        } else {
-          next()
+    routes: [{
+            path: "/callback",
+            name: "Callback",
+            component: Callback
+        },
+        {
+            path: "/assets",
+            name: "Assets",
+            component: Assets,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/profile",
+            name: "Profile",
+            component: Profile,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/routes",
+            name: "Routes",
+            component: Routes,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/",
+            name: "Dashboard",
+            component: LiveView,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+
+        {
+            path: "/employees",
+            name: "Employees",
+            component: Employees,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/applicants",
+            name: "Applicants",
+            component: Applicants,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/chat",
+            name: "Chat",
+            component: Chat,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: "/admin",
+            name: "Admin",
+            component: Admin,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated() || !auth.isAdmin()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
         }
-      }
-    },
-    {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated()) {
-          next(false)
-        } else {
-          next()
-        }
-      }
-    },
-    {
-      path: '/routes',
-      name: 'Routes',
-      component: Routes,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated()) {
-          next(false)
-        } else {
-          next()
-        }
-      }
-    },
-    {
-      path: '/employees',
-      name: 'Employees',
-      component: Employees,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated()) {
-          next(false)
-        } else {
-          next()
-        }
-      }
-    },
-    {
-      path: '/applicants',
-      name: 'Applicants',
-      component: Applicants,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated()) {
-          next(false)
-        } else {
-          next()
-        }
-      }
-    },
-    {
-      path: '/chat',
-      name: 'Chat',
-      component: Chat,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated()) {
-          next(false)
-        } else {
-          next()
-        }
-      }
-    },
-    {
-      path: '/admin',
-      name: 'Admin',
-      component: Admin,
-      beforeEnter: (to, from, next) => {
-        if (!auth.isAuthenticated() || !auth.isAdmin()) {
-          next(false)
-        } else {
-          next()
-        }
-      }
-    }
-  ]
+    ]
 })
 
 // import Vue from 'vue'
@@ -168,4 +188,4 @@ export default new Router({
 
 //     { path: '*', component: load('Error404') } // Not found
 //   ]
-// })
+// })li
