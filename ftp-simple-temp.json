@@ -1,0 +1,11 @@
+[{
+    "name": "devtools",
+    "host": "192.168.1.18",
+    "port": 21,
+    "type": "ftp",
+    "username": "",
+    "password": "",
+    "path": "/",
+    "autosave": true,
+    "confirm": true
+}]

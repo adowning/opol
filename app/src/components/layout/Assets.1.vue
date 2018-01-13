@@ -1,48 +1,119 @@
 <template>
   <div class="layout-padding">
-<div class="row">
-  <div class="col-md-12">
-    <div class="box">
-      <div class="box-body">
-      
-          <div class="row">
-            <div class="col-md-12">
-             
-              <div id="toolbar">
-                <select name="bulk_actions" class="form-control select2">
-                  <option value="edit">Edit</option>
-                  <option value="delete">Delete</option>
-                  <option value="labels">Generate Labels</option>
-                </select>
-                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
-              </div>
-        
+    <!-- <q-collapsible label="Showcasing some of the options" sublabel="Change them to see it in action" style="max-width: 600px; margin-bottom: 25px" class="shadow-2">
+      <q-field icon="title" label="Data Table Title" :label-width="4">
+        <q-input v-model="config.title" />
+      </q-field>
 
-              <vuetable
-              name="assets"
-              data-row-style="rowStyle" 
-              data-toolbar="#toolbar"
-              class="table table-striped snipe-table"
-       
-              data-advanced-search="true"
-              data-id-table="advancedTable"
-              api-url="http://localhost/api/v1"
-              data-click-to-select="true"
-              </vuetable>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-       
-      </div><!-- ./box-body -->
-    </div><!-- /.box -->
-  </div>
-</div>
+      <q-field icon="widgets" label="Some Features" :label-width="4">
+        <div class="column group" style="margin: -5px -7px">
+          <q-checkbox v-model="config.refresh" label="Refresh" />
+          <q-checkbox v-model="config.columnPicker" label="Column Picker" />
+          <q-checkbox v-model="pagination" label="Pagination" />
+          <q-checkbox v-model="config.responsive" label="Responsive" />
+          <q-checkbox v-model="config.noHeader" label="No Header" />
+        </div>
+      </q-field>
+
+      <q-field icon="check box" label="Selection" :label-width="4">
+        <q-select v-model="config.selection" class="col-xs-12 col-sm" float-label="Selection" :options="[
+            {label: 'None', value: false},
+            {label: 'Single', value: 'single'},
+            {label: 'Multiple', value: 'multiple'}
+          ]" />
+      </q-field>
+
+      <q-field icon="place" label="Sticky Columns" :label-width="4">
+        <q-select v-model="config.leftStickyColumns" class="col-xs-12 col-sm" float-label="Left Sticky Columns" :options="[
+            {label: 'None', value: 0},
+            {label: '1', value: 1},
+            {label: '2', value: 2}
+          ]" />
+        <br>
+        <q-select v-model="config.rightStickyColumns" class="col-xs-12 col-sm" float-label="Right Sticky Columns" :options="[
+            {label: 'None', value: 0},
+            {label: '1', value: 1},
+            {label: '2', value: 2}
+          ]" />
+      </q-field>
+
+      <q-field icon="format_line_spacing" label="Row height" :label-width="4">
+        <q-slider v-model="rowHeight" :min="50" :max="200" label-always :label-value="`${rowHeight}px` " />
+      </q-field>
+
+      <q-field icon="content_paste" label="Table body" :label-width="4">
+        <div class="row no-wrap items-center">
+          <div class="col-auto" style="margin-top: 10px">
+            <q-select v-model="bodyHeightProp" float-label="Style" :options="[
+                {label: 'Auto', value: 'auto'},
+                {label: 'Height', value: 'height'},
+                {label: 'Min Height', value: 'minHeight'},
+                {label: 'Max Height', value: 'maxHeight'}
+              ]" />
+          </div>
+          <q-slider class="col" v-model="bodyHeight" :min="100" :max="700" label-always :disable="bodyHeightProp === 'auto'" :label-value="`${bodyHeight}px`" />
+        </div>
+      </q-field>
+    </q-collapsible> -->
+
+    <q-data-table :data="table" :config="config" :columns="columns" @refresh="refresh" @selection="selection">
+      <template slot="col-message" slot-scope="cell">
+        <span class="light-paragraph">{{cell.data}}</span>
+      </template>
+      <template slot="col-source" slot-scope="cell">
+        <div v-if="cell.data === 'checkin'" class="my-label text-white bg-primary">
+          Audit
+          <q-tooltip>Some data</q-tooltip>
+        </div>
+        <div v-else class="my-label text-white bg-negative">{{cell.data}}</div>
+      </template>
+      <template slot='col-user_can_checkout' slot-scope='cell' align="right">
+        <div v-if="cell.data">
+          <q-btn outline color="primary" align="right" @click='openCheckOut(cell.row.id)' small>Check Out</q-btn>
+        </div>
+        <div v-else>
+          <q-btn outline color="purple" @click='checkIn(cell.row.id)' small>Check In</q-btn>
+          <!-- <q-btn color="primary" @click='check(cell.row.id)'>Check In</q-btn> -->
+
+        </div>
+      </template>
+      <!-- <template slot="selection" slot-scope="props">
+        <q-btn flat color="primary" @click="changeMessage(props)">
+          <q-icon name="edit" />
+        </q-btn>
+        <q-btn flat color="primary" @click="deleteRow(props)">
+          <q-icon name="delete" />
+        </q-btn>
+      </template> -->
+    </q-data-table>
+    <q-modal ref="positionModal" :position="position" :content-css="{minWidth: '80vw', minHeight: '80vh'}">
+      <q-modal-layout>
+        <q-toolbar slot="header">
+          <q-btn flat @click="$refs.positionModal.close()">
+            <q-icon name="keyboard_arrow_left" />
+
+          </q-btn>
+          <q-toolbar-title>
+            Checkout Asset
+          </q-toolbar-title>
+        </q-toolbar>
+
+        <div class="layout-padding">
+          <q-select stack-label="Delimited options" inverted color="secondary" separator v-model="select" :options="userList" />
+          <div v-if="select">
+            <q-btn color="primary" @click="checkOut()">Checkout</q-btn>
+
+          </div>
+          <!-- <q-btn color="warning" @click="$refs.layoutModal.close()">Cancel</q-btn> -->
+        </div>
+      </q-modal-layout>
+
+    </q-modal>
   </div>
 
 </template>
 
 <script>
-import Vuetable from 'vuetable-2/src/components/Vuetable'
-
 import {
   QDataTable,
   QField,

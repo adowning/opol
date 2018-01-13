@@ -11,7 +11,7 @@ var //program = require('commander'),
 
 var config = new RootConfig()
     // config.mqttURL = "mqtt://localhost:1884"
-config.mqttURL = 'mqtt://localhost:1883'
+config.mqttURL = 'mqtt://vultr.ashdevtools.com:1883'
     // config.mqttURL = "ws://localhost:1884"
 config.query = 'owntracks/#'
 config.channel = new FirebaseChannelConfig()

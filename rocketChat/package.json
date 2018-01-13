@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "rocketchat": "^0.57.3-alpha"
+    "rocketchat": "^0.57.3-alpha",
+    "ws": "^4.0.0"
   }
 }

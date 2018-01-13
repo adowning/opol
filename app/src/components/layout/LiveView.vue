@@ -9,26 +9,18 @@
 
       <div class="row">
 
-        <div class="col-sm-9">
+        <div class="col-sm-12">
 
-          <q-toolbar>
-            <q-btn flat>
-              <q-icon name="menu" />
-            </q-btn>
-            <q-toolbar-title>
-              Toolbar
-            </q-toolbar-title>
-            <q-btn flat>
-              <q-icon name="more_vert" />
-            </q-btn>
-          </q-toolbar>
+     <div class="box box-primary">
+            <div class="box-body box-profile">
           <google-map></google-map>
-
+</div>
+</div>
         </div>
 
-        <div class="col-sm-3">
+        <!-- <div class="col-sm-3">
 
-          <!-- <q-toolbar >
+          <q-toolbar >
         <q-btn flat>
           <q-icon name="menu" />
         </q-btn>
@@ -38,11 +30,11 @@
         <q-btn flat>
           <q-icon name="more_vert" />
         </q-btn>
-      </q-toolbar> -->
+      </q-toolbar> 
 
           <chat></chat>
 
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

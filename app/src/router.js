@@ -13,10 +13,10 @@ import Chat from "./components/Chat/Chat"
 import Callback from "./callback"
 import LiveView from "./components/layout/LiveView.vue"
 import Assets from "./components/layout/Assets"
-import WorkShop from "./components/layout/WorkShop.vue"
-Vue.use(Router)
-Vue.use(VueResource)
-
+import WorkShop from "./components/WorkShop/MyVuetable"
+import AssetDetail from "./components/WorkShop/AssetDetail"
+import VueRouter from "vue-router"
+Vue.use(VueRouter)
 const auth = new AuthService()
 
 export default new Router({
@@ -65,6 +65,18 @@ export default new Router({
             path: "/workshop",
             name: "WorkShop",
             component: WorkShop,
+            beforeEnter: (to, from, next) => {
+                if (!auth.isAuthenticated()) {
+                    next(false)
+                } else {
+                    next()
+                }
+            }
+        },
+                {
+            path: "/asset_detail/:id",
+            name: "AssetDetail",
+            component: AssetDetail,
             beforeEnter: (to, from, next) => {
                 if (!auth.isAuthenticated()) {
                     next(false)
