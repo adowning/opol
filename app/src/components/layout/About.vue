@@ -8,8 +8,8 @@
 export default {
   data: () => ({}),
   methods: {},
-  computed: {}
-}
+  computed: {} //
+};
 </script>
 
 <style lang="stylus" scoped>

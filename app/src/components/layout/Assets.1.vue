@@ -12,7 +12,7 @@
           <q-checkbox v-model="pagination" label="Pagination" />
           <q-checkbox v-model="config.responsive" label="Responsive" />
           <q-checkbox v-model="config.noHeader" label="No Header" />
-        </div>
+        </div>//asdf
       </q-field>
 
       <q-field icon="check box" label="Selection" :label-width="4">
@@ -126,11 +126,11 @@ import {
   QTooltip,
   QCollapsible,
   clone
-} from "quasar"
+} from "quasar";
 
 // import table from '../../assets/table'
-var table
-var userList = []
+var table;
+var userList = [];
 export default {
   data: {
     table: []
@@ -152,27 +152,27 @@ export default {
       return this.$snipeit
         .get("hardware")
         .then(response => {
-          console.log(response.data.rows)
-          this.table = response.data.rows
+          console.log(response.data.rows);
+          this.table = response.data.rows;
         })
         .catch(e => {
-          this.errors.push(e)
-        })
+          this.errors.push(e);
+        });
     }
   },
   methods: {
     changeMessage(props) {
       props.rows.forEach(row => {
-        row.data.message = "Hai"
-      })
+        row.data.message = "Hai";
+      });
     },
     deleteRow(props) {
       props.rows.forEach(row => {
-        this.table.splice(row.index, 1)
-      })
+        this.table.splice(row.index, 1);
+      });
     },
     refresh(done) {
-      console.log("refreshing")
+      console.log("refreshing");
       // this.table = response.data.rows = this.$db.ref("checkedOutDevices")
       // this.$db
       //   .ref("checkedOutDevices")
@@ -189,28 +189,28 @@ export default {
       // // }, 5000)
     },
     selection(number, rows) {
-      console.log(`selected ${number}: ${rows}`)
+      console.log(`selected ${number}: ${rows}`);
     },
     rowClick(row) {
-      console.log("clicked on a row", row)
+      console.log("clicked on a row", row);
     },
     checkIn(id) {
       this.$snipeit
         .post("hardware/" + id + "/checkin")
         .then(response => {
-          console.log(reponse)
-          this.refresh()
+          console.log(reponse);
+          this.refresh();
         })
         .catch(e => {
-          this.errors.push(e)
-          this.refresh()
-        })
+          this.errors.push(e);
+          this.refresh();
+        });
     },
     openCheckOut(id) {
       this.$nextTick(() => {
-        this.checkoutID = id
-        this.$refs.positionModal.open(id)
-      })
+        this.checkoutID = id;
+        this.$refs.positionModal.open(id);
+      });
     },
     checkOut() {
       console.log(
@@ -221,7 +221,7 @@ export default {
           "&asset_id=" +
           this.checkoutID +
           "&location_id=1"
-      )
+      );
       this.$snipeit
         .post(
           "hardware/" +
@@ -233,20 +233,20 @@ export default {
             "&checkout_to_type=user"
         )
         .then(response => {
-          console.log(response)
-          this.refresh()
-          this.$refs.positionModal.close()
+          console.log(response);
+          this.refresh();
+          this.$refs.positionModal.close();
         })
         .catch(e => {
-          console.log(e)
-          this.refresh()
+          console.log(e);
+          this.refresh();
 
-          this.errors.push(e)
-        })
+          this.errors.push(e);
+        });
     }
   },
   beforeDestroy() {
-    clearTimeout(this.timeout)
+    clearTimeout(this.timeout);
   },
   data() {
     return {
@@ -321,7 +321,7 @@ export default {
           sort: false,
           type: "string",
           format(value) {
-            return value.status_meta
+            return value.status_meta;
           }
         },
         {
@@ -332,9 +332,9 @@ export default {
           type: "string",
           format(value) {
             try {
-              return value.name
+              return value.name;
             } catch (e) {}
-            return ""
+            return "";
           }
         },
         {
@@ -344,7 +344,7 @@ export default {
           sort: false,
           type: "string",
           format(value) {
-            return value.name
+            return value.name;
           }
         },
 
@@ -352,13 +352,13 @@ export default {
           label: "Checkin/Checkout",
           field: "user_can_checkout",
           sort: false,
-           width: '120px',
-    style: {'text-align': 'center'},
+          width: "120px",
+          style: { "text-align": "center" },
           format(value) {
             if (value) {
-              return "Check In"
+              return "Check In";
             } else {
-              return "Check Out"
+              return "Check Out";
             }
           }
         }
@@ -367,40 +367,40 @@ export default {
       pagination: false,
       rowHeight: 50,
       bodyHeightProp: "maxHeight",
-      bodyHeight: 500,
+      bodyHeight: 500
       // bodyStyle:
       // {
       //   align: "right"
       // }
-    }
+    };
   },
 
   created() {
-    var _this = this
-    var ar = []
+    var _this = this;
+    var ar = [];
     this.$snipeit
       .get("hardware")
       .then(response => {
-        console.log(response.data.rows)
-        this.table = response.data.rows
+        console.log(response.data.rows);
+        this.table = response.data.rows;
       })
       .catch(e => {
-        this.errors.push(e)
-      })
+        this.errors.push(e);
+      });
     this.$snipeit
       .get("users")
       .then(response => {
-        console.log(response.data.rows)
+        console.log(response.data.rows);
         // this.userList = response.data.rows
         for (var user of response.data.rows) {
-          var item = {}
-          ;(item.label = user.name), (item.value = user.id)
-          this.userList.push(item)
+          var item = {};
+          (item.label = user.name), (item.value = user.id);
+          this.userList.push(item);
         }
       })
       .catch(e => {
-        this.errors.push(e)
-      })
+        this.errors.push(e);
+      });
   },
   watch: {
     // table(value){
@@ -408,32 +408,32 @@ export default {
     // }
     pagination(value) {
       if (!value) {
-        this.oldPagination = clone(this.config.pagination)
-        this.config.pagination = false
-        return
+        this.oldPagination = clone(this.config.pagination);
+        this.config.pagination = false;
+        return;
       }
 
-      this.config.pagination = this.oldPagination
+      this.config.pagination = this.oldPagination;
     },
     rowHeight(value) {
-      this.config.rowHeight = value + "px"
+      this.config.rowHeight = value + "px";
     },
     bodyHeight(value) {
-      let style = {}
+      let style = {};
       if (this.bodyHeightProp !== "auto") {
-        style[this.bodyHeightProp] = value + "px"
+        style[this.bodyHeightProp] = value + "px";
       }
-      this.config.bodyStyle = style
+      this.config.bodyStyle = style;
     },
     bodyHeightProp(value) {
-      let style = {}
+      let style = {};
       if (value !== "auto") {
-        style[value] = this.bodyHeight + "px"
+        style[value] = this.bodyHeight + "px";
       }
-      this.config.bodyStyle = style
+      this.config.bodyStyle = style;
     }
   }
-}
+};
 </script>
 
 <style lang="stylus">
