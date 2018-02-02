@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div id="q-pp">
     <div class="wrapper">
       <va-navibar :auth="auth" :authenticated="authenticated" :admin="admin"></va-navibar>
@@ -7,8 +7,12 @@
       <va-content-wrap :auth="auth" :authenticated="authenticated" :admin="admin"></va-content-wrap>
     </div>
   </div>
+</template>-->
+<template>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
-
   <!-- <div id="q-app">
     <app-layout></app-layout>
   </div> -->

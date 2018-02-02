@@ -3,44 +3,63 @@
       "configurations": [
             {
                   "type": "chrome",
-                  "request": "attach",
-                  "name": "Attach to Chrome",
-                  "port": 9222,
-                  "webRoot": "${workspaceFolder}"
-            },
-            {
-                  "name": "Debug",
-                  "type": "chrome",
                   "request": "launch",
-                  "webRoot": "${workspaceRoot}",
-                  "url": "http://localhost:8080/#/",
-                  "userDataDir": "${workspaceRoot}/.vscode/chrome",
+                  "name": "Launch Chrome against localhost",
+                  "url": "http://localhost:8081",
                   "sourceMaps": true,
-                  // "preLaunchTask": "development",
-                  "smartStep": true,
-                  "internalConsoleOptions": "openOnSessionStart",
-                  "skipFiles": [
+                  "webRoot": "${workspaceRoot}/app",
+                  // "trace": "verbose",
+                   "timeout": 7000,
+                   "internalConsoleOptions": "openOnSessionStart",
+                   
+                   "skipFiles": [
                         "node_modules/**"
                   ],
                   "sourceMapPathOverrides": {
                         "webpack:///*": "${webRoot}/*"
                   }
             },
-                    {
-                     "name": "Launch localhost",
-                     "firefoxExecutable": "/home/ash/.local/share/umake/web/firefox-dev/firefox",
-                     "type": "firefox",
-                     "request": "launch",
-                     "reAttach": true,
-                     "url": "http://localhost:8080/#/",
-                     "pathMappings": [
-                      {
-                       "url": "http://localhost",
-                       "path": "${workspaceFolder}"
-                      }
-                     ]
-                    }
-      ]
+      
+      {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "webRoot": "${workspaceFolder}"
+      },
+      {
+            "name": "Debug",
+            "type": "chrome",
+            "request": "launch",
+            "webRoot": "${workspaceRoot}",
+            "url": "http://localhost:8080/#/",
+            "userDataDir": "${workspaceRoot}/.vscode/chrome",
+            "sourceMaps": true,
+            // "preLaunchTask": "development",
+            "smartStep": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "skipFiles": [
+                  "node_modules/**"
+            ],
+            "sourceMapPathOverrides": {
+                  "webpack:///*": "${webRoot}/*"
+            }
+      },
+      // {
+      //       "name": "Launch localhost",
+      //       "firefoxExecutable": "/home/ash/.local/share/umake/web/firefox-dev/firefox",
+      //       "type": "firefox",
+      //       "request": "launch",
+      //       "reAttach": true,
+      //       "url": "http://localhost:8080/#/",
+      //       "pathMappings": [
+      //             {
+      //                   "url": "http://localhost",
+      //                   "path": "${workspaceFolder}"
+      //             }
+      //       ]
+      // }
+]
 }
 // {
 //  // Use IntelliSense to learn about possible attributes.
@@ -56,7 +75,6 @@
 //         "url": "http://localhost:8080",
 //         "webRoot": "${workspaceFolder}"
 //   },
-  
 //   {
 //    "name": "Launch index.html",
 //    "type": "firefox",
@@ -85,11 +103,5 @@
 //           }
 //          ]
 //         }
-
-
-
-
 //  ]
 //  }
-
- 

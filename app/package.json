@@ -12,6 +12,7 @@
         "lint": "eslint --ext .js,.vue src"
     },
     "dependencies": {
+        "@websanova/vue-auth": "^2.21.1-beta",
         "EventEmitter": "^1.0.0",
         "accounting": "^0.4.1",
         "admin-lte": "^2.4.2",
@@ -22,6 +23,7 @@
         "babel-runtime": "^6.25.0",
         "ddp": "^0.12.1",
         "ddp-login": "^1.0.10",
+        "element-ui": "^2.1.0",
         "expose-loader": "^0.7.4",
         "firebase": "^4.8.1",
         "fullcalendar-scheduler": "^1.9.1",
@@ -34,6 +36,8 @@
         "quasar-framework": "git+https://git@github.com/quasarframework/quasar-edge.git",
         "transform-runtime": "^0.0.0",
         "vue": "^2.5.0",
+        "vue-auth": "^1.0.0-alpha.1",
+        "vue-axios": "^2.0.2",
         "vue-event-handler": "^1.1.0",
         "vue-events": "^3.1.0",
         "vue-frame": "^1.0.5",

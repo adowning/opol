@@ -2,7 +2,7 @@
   <div>
     <filter-bar></filter-bar>
     <vuetable ref="vuetable"
-      api-url="http://ramnode1.ashdevtools.com:8080/api/v1/hardware"
+      api-url="http://168.235.96.46:8080/api/v1/hardware"
       :fields="fields"
       pagination-path=""
       :http-options="httpoptions"

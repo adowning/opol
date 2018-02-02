@@ -286,7 +286,7 @@
 
 <script>
 import { mapGetters } from "vuex"
-
+import router from './router'
 export default {
   // data() {
   //   this.auth.getProfile((err, profile) => {
@@ -316,7 +316,9 @@ export default {
   },
   methods: {
     login() {
-      this.$parent.login()
+      // this.$parent.login()
+        router.go('/login')
+
     },
     logout() {
       this.$parent.logout()
